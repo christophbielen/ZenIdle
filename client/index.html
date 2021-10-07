@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="shortcut icon" href="favicon.ico">
+			
+		<meta charset="utf-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" type="text/css" href="/client/style.css">
+		
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		
+		<title>Zen-idle</title>
+		
+	</head>
+	
+	<body id="body">
+
+
+
+
+		<div id="chatDiv">
+			<div id="chatTextDiv">
+			</div>
+			<input id="chatinput" type="text"></input>
+		</div>
+		<div id="openchat">Chat ></div>
+
+
+
+
+		<script src="https://cdn.socket.io/4.2.0/socket.io.min.js"></script>
+		<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+		<script>
+			if (typeof jQuery == 'undefined') {
+				document.write(unescape("%3Cscript src='/client/js/jquery-2.2.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+			}
+		</script>
+		<script src="/client/js/client.js"></script>
+	</body>
+</html>	

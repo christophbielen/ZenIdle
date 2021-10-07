@@ -1,0 +1,17 @@
+{
+  "name": "001",
+  "version": "1.0.0",
+  "description": "ZenIdle incremental game",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "shortid": "^2.2.16",
+    "socket.io": "^4.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "CB",
+  "license": "ISC"
+}
