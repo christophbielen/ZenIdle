@@ -23,6 +23,11 @@ var Player = function(id){
 	return self;
 };
 
+Player.onconnect = function(socketid){
+	var player = Player(socketid);
+	player_list[socketid] = player;
+};
+
 //socket io
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
@@ -30,8 +35,16 @@ io.sockets.on('connection', function(socket){
 	
 	socket_list[socket.id] = socket;
 	
-	var player = Player(socket.id);
-	player_list[socket.id] = player;
+	socket.on('login', function(data){console.log(data.username);
+		if(data.username=="Bob"&&data.password=="Bob"){
+			Player.onconnect(socket.id);
+			socket.emit('loginResponse', {success:true});
+		}else{
+			socket.emit('loginResponse', {success:false});
+		}
+	});
+
+	
 	
 //	serverMsg("A new player joined the game: "+socket.id);
 	

@@ -5,7 +5,8 @@
 			
 		<meta charset="utf-8"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
+
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 		<link rel="stylesheet" type="text/css" href="/client/style.css">
 		
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
@@ -29,7 +30,44 @@
 		<div id="openchat">Chat ></div>
 
 
+		<div id="loginScreen">
+			<h1 class="title">ZenIdle</h1>
 
+			<div class="login">
+				<h1>Login</h1>
+				<form >
+					<label for="username">
+						<i class="fas fa-user"></i>
+					</label>
+					<input type="text" name="username" placeholder="Username/nickname" id="username" required>
+					<label for="password">
+						<i class="fas fa-lock"></i>
+					</label>
+					<input type="password" name="password" placeholder="Password" id="password" required>
+					<input  value="Login" id="loginbutton">
+				</form>
+			</div>
+			<h2>or</h2>
+			<div class="signup">
+				<h1>Sign up</h1>
+				<form >
+					<label for="username">
+						<i class="fas fa-user"></i>
+					</label>
+					<input type="text" name="username" placeholder="Username/nickname" id="usernamesignup" required>
+					
+					<label for="passwordsignup">
+						<i class="fas fa-lock"></i>
+					</label>
+					<input type="password" name="passwordsignup" placeholder="Password" id="passwordsignup" required>
+					<label for="passwordbsignup">
+						<i class="fas fa-lock"></i>
+					</label>
+					<input type="password" name="passwordbsignup" placeholder="Password" id="passwordbsignup" required>
+					<input  value="Sign up" id="signupbutton">
+				</form>
+			</div>
+		</div>
 
 		<script src="https://cdn.socket.io/4.2.0/socket.io.min.js"></script>
 		<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>

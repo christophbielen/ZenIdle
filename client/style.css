@@ -16,8 +16,80 @@ html {
 
 body {
 	background-color:#bbddff;
+	margin:0;
 }
 
+/* Login Screen */
+
+#loginScreen {
+	position:aboslute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:110;
+	background-color: #bbddff;
+	text-align:center;
+}
+
+#loginScreen .title{
+	font-size:3rem;
+	color:#2069b3;
+}
+
+.login, .signup {
+	width: 400px;
+	background-color: #ffffff;
+	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+	margin: 25px auto;
+}
+.login h1, .signup h1 {
+	text-align: center;
+	color: #5b6574;
+	font-size: 24px;
+	padding: 20px 0 20px 0;
+	border-bottom: 1px solid #dee0e4;
+}
+.login form, .signup form{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding-top: 20px;
+}
+.login form label, .signup form label{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 50px;
+	background-color: #2069b3;
+	color: #ffffff;
+}
+.login form input[type="password"], .login form input[type="text"], .signup form input[type="password"], .signup form input[type="text"]{
+	width: 310px;
+	height: 50px;
+	border: 1px solid #dee0e4;
+	margin-bottom: 20px;
+	padding: 0 15px;
+}
+#loginbutton, #signupbutton {
+	width: 100%;
+	padding: 15px;
+   margin-top: 20px;
+	background-color: #2069b3;
+	border: 0;
+	cursor: pointer;
+	font-weight: bold;
+	font-size:1rem;
+	color: #ffffff;
+	transition: background-color 0.2s;
+	text-align:center;
+}
+
+#loginbutton:hover, #signupbutton:hover {
+  background-color: #447aca;
+	transition: background-color 0.2s;
+}
 
 /* Chat */
 
@@ -32,6 +104,7 @@ body {
 	cursor:pointer;	
 	z-index:100;
 	width:4rem;
+	display:none;
 }
 
 #chatDiv {
