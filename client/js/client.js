@@ -44,6 +44,10 @@ socket.on('signupResponse', function(data){
 	}
 });
 
+socket.on('nameTaken', function(data){
+		alert("This name is already taken. Try again with another name.");
+});
+
 ////////////////////////
 //   Chat functions   //
 ////////////////////////
