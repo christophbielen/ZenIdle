@@ -123,7 +123,7 @@ io.sockets.on('connection', function(socket){
 	socket.on('disconnect', function(){
 		delete socket_list[socket.id];
 		delete player_list[socket.id];
-		serverMsg("Player "+socket.id + " left the game");
+		serverMsg("Player "+socket.name + " left the game");
 	});
 });
 

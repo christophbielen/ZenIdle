@@ -19,6 +19,12 @@ loginbutton.on('click', function(){
 	socket.emit('login', {username:usernamea.val(), password:passworda.val()});
 });
 
+passworda.keypress(function(event) {
+	if (event.keyCode == 13) {
+		socket.emit('login', {username:usernamea.val(), password:passworda.val()});
+	}
+});
+
 socket.on('loginResponse', function(data){
 	if (data.success){
 		loginScreen.hide();
@@ -33,6 +39,16 @@ signupbutton.on('click', function(){
 		socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
 	}else{
 		alert("Passwords don't match.");
+	}
+});
+
+passwordbsignup.keypress(function(event) {
+	if (event.keyCode == 13) {
+		if(passwordsignup.val() == passwordbsignup.val()){
+			socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
+		}else{
+			alert("Passwords don't match.");
+		}
 	}
 });
 

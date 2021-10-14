@@ -116,6 +116,7 @@ body {
 	z-index:99;
 	height:33vh;
 	width:33vw;
+	min-width:600px;
 	display:none;
 	border-top-right-radius:5px;
 }
