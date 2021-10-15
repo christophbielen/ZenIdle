@@ -1,9 +1,7 @@
 //express server and database
-const mongojs = require('mongojs');
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb+srv://CB-app:Fmd1dgad@cluster0.xdruo.mongodb.net/ZenIdle?retryWrites=true&w=majority";
 
-const dburi = process.env.MONGODB_URI;
-
-const db = mongojs(dburi, ['account', 'progress']);
 
 const bcrypt = require("bcrypt");
 
@@ -44,7 +42,33 @@ Player.onconnect = function(socket){
 
 //check passwords
 var isValidPassword = function(data, cb){
-	db.account.find({username:data.username}, function(err, res){
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err;
+		var dbo = db.db("ZenIdle");
+
+		dbo.collection("account").find({username:data.username}).toArray(function(err, res) {
+			if (err) throw err;
+			
+			if(res[0]){
+				bcrypt.compare(data.password, res[0].hash, function(err, isMatch) {
+	
+					if (err) {
+						throw err
+						} else if (!isMatch) {
+						cb(false);
+						} else {
+						cb(true);
+						}
+				});
+			} else{
+				cb(false);
+			}
+
+
+			db.close();
+		  });
+	  });
+	/*db.account.find({username:data.username}, function(err, res){
 		if(res[0]){
 			bcrypt.compare(data.password, res[0].hash, function(err, isMatch) {
 
@@ -59,25 +83,53 @@ var isValidPassword = function(data, cb){
 		} else{
 			cb(false);
 		}
-	});	
+	});*/	
 }
 
 var isUsernameTaken = function(data, cb){
-	db.account.find({username:data.username}, function(err, res){
+	MongoClient.connect(url, function(err, db) {
+		if (err) throw err;
+		var dbo = db.db("ZenIdle");
+
+		dbo.collection("account").find({username:data.username}).toArray(function(err, res) {
+			if (err) throw err;
+			
+			if(res[0]){
+				cb(true);
+			}else{
+				cb(false);
+			}
+
+			db.close();
+		  });
+	  });
+
+	/*db.account.find({username:data.username}, function(err, res){
 		if(res[0]){
 			cb(true);
 		}else{
 			cb(false);
 		}
-	});
+	});*/
 }
 
 var addUser = function(data, cb){
 	bcrypt.hash(data.password, 10).then(hash=>{
+		MongoClient.connect(url, function(err, db) {
+			if (err) throw err;
+			var dbo = db.db("mydb");
+			dbo.collection("customers").insert({username:data.username, hash:hash}).toArray(function(err, result) {
+			  if (err) throw err;
+			  cb(true);
+			  db.close();
+			});
+		  });
+	});
+	/*bcrypt.hash(data.password, 10).then(hash=>{
 		db.account.insert({username:data.username, hash:hash}, function(err){
 			cb(true);
 		});
-	});	
+	});*/	
 }
 
 //socket io
