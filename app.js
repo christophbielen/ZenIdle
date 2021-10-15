@@ -1,6 +1,6 @@
 //express server and database
 const mongojs = require('mongojs');
-const dburi = process.env.MONGODB_URI || "localhost:27017/ZenIdle";
+const dburi = process.env.MONGODB_URI;
 
 const db = mongojs(dburi, ['account', 'progress']);
 
