@@ -1,8 +1,9 @@
 //express server and database
-const mongojs = require('mongojs');
-const dburi = process.env.MONGODB_URI;
 
-const db = mongojs(dburi, ['account', 'progress']);
+var databaseUrl = process.env.MONGODB_URI;
+ var collections = ["account", "progress"]
+ var db = require("mongojs").connect(databaseUrl, collections);
+
 
 const bcrypt = require("bcrypt");
 
