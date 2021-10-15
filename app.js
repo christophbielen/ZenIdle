@@ -118,7 +118,8 @@ var addUser = function(data, cb){
 		MongoClient.connect(url, function(err, db) {
 			if (err) throw err;
 			var dbo = db.db("mydb");
-			dbo.collection("customers").insert({username:data.username, hash:hash}).toArray(function(err, result) {
+			var myobj = {username:data.username, hash:hash};
+			dbo.collection("account").insertOne(myobj, function(err, res) {
 			  if (err) throw err;
 			  cb(true);
 			  db.close();
