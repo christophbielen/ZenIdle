@@ -121,6 +121,7 @@ var addUser = function(data, cb){
 			var myobj = {username:data.username, hash:hash};
 			dbo.collection("account").insertOne(myobj, function(err, res) {
 			  if (err) throw err;
+			  emit('debug', {result:res});
 			  cb(true);
 			  db.close();
 			});

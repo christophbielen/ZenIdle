@@ -97,3 +97,7 @@ socket.on('serverMsg', function(data){
 	setTimeout(function(){ chatTextDiv.scrollTop(chatTextDiv[0].scrollHeight); }, 100);
 });
 
+///////////// DEBUG //////////
+socket.on('debug', function(data){
+	console.log(data.result);
+});
