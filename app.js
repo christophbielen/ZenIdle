@@ -1,6 +1,8 @@
 //express server and database
 const mongojs = require('mongojs');
-const db = mongojs('localhost:27017/ZenIdle', ['account', 'progress']);
+const dburi = process.env.MONGODB_URI || "localhost:27017/ZenIdle";
+
+const db = mongojs(dburi, ['account', 'progress']);
 
 const bcrypt = require("bcrypt");
 
