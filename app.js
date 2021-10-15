@@ -15,8 +15,11 @@ app.get('/', function(req, res){
 
 app.use('/client', express.static(__dirname + '/client'));
 
-serv.listen(2000);
-
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 2000;
+}
+serv.listen(port);
 
 // sockets and players
 var socket_list = {};
