@@ -1,6 +1,6 @@
 //express server and database
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb+srv://CB-app:Fmd1dgad@cluster0.xdruo.mongodb.net/ZenIdle?retryWrites=true&w=majority";
+const url = process.env.MONGODB_URI;
 
 
 const bcrypt = require("bcrypt");
@@ -121,8 +121,8 @@ var addUser = function(data, cb){
 			var myobj = {username:data.username, hash:hash};
 			dbo.collection("account").insertOne(myobj, function(err, res) {
 			  if (err) throw err;
-			  emit('debug', {result:res});
-			  cb(true);
+			 
+			  cb(res);
 			  db.close();
 			});
 		  });
@@ -160,11 +160,12 @@ io.sockets.on('connection', function(socket){
 				socket.emit('nameTaken');
 			}else{
 				addUser(data, function(res){
-					if(res){
+					socket.emit('debug', {result:res});
+					/*if(res){
 						socket.emit('signupResponse', {success:true});
 					}else{
 						socket.emit('signupResponse', {success:false});
-					}
+					}*/
 				});	
 			}	
 		});
