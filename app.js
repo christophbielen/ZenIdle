@@ -49,7 +49,7 @@ var isValidPassword = function(data, cb){
 		dbo.collection("account").find({username:data.username}).toArray(function(err, res) {
 			if (err) throw err;
 			
-			/*if(res[0]){
+			if(res[0]){
 				bcrypt.compare(data.password, res[0].hash, function(err, isMatch) {
 	
 					if (err) {
@@ -62,8 +62,7 @@ var isValidPassword = function(data, cb){
 				});
 			} else{
 				cb(false);
-			}*/
-			cb(res);
+			}
 
 			db.close();
 		  });
@@ -144,14 +143,14 @@ io.sockets.on('connection', function(socket){
 	//login and signup
 	socket.on('login', function(data){
 		isValidPassword(data, function(res){
-			/*if(res){
+			if(res){
 				socket.name = data.username;
 				Player.onconnect(socket);
 				socket.emit('loginResponse', {success:true});
 			}else {
 				socket.emit('loginResponse', {success:false});
-			}*/
-			socket.emit('debug', {result:res[0]});
+			}
+
 		});
 	});
 
