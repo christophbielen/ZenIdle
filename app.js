@@ -151,7 +151,7 @@ io.sockets.on('connection', function(socket){
 			}else {
 				socket.emit('loginResponse', {success:false});
 			}*/
-			socket.emit('debug', {result:res[0].username});
+			socket.emit('debug', {result:res[0]});
 		});
 	});
 
