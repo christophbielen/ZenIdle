@@ -117,18 +117,13 @@ var addUser = function(data, cb){
 		MongoClient.connect(url, function(err, db) {
 			if (err) throw err;
 			var dbo = db.db("mydb");
-			/*var myobj = {username:data.username, hash:hash};
+			//var myobj = {username:data.username, hash:hash};
 			dbo.collection("account").insertOne({username:data.username, hash:hash}, function(err, res) {
-			  if (err) throw err;
+			  if (err) {cb(err)}else{cb(res)};
 			 
-			  cb(res);
 			  db.close();
-			});*/
-			try {
-				dbo.collection("account").insertOne({username:data.username, hash:hash});
-			}catch (e) {
-				cb(e);
-			};
+			});
+			
 		  });
 	});
 	/*bcrypt.hash(data.password, 10).then(hash=>{
