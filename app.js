@@ -66,23 +66,7 @@ var isValidPassword = function(data, cb){
 
 			db.close();
 		  });
-	  });
-	/*db.account.find({username:data.username}, function(err, res){
-		if(res[0]){
-			bcrypt.compare(data.password, res[0].hash, function(err, isMatch) {
-
-				if (err) {
-					throw err
-					} else if (!isMatch) {
-					cb(false);
-					} else {
-					cb(true);
-					}
-			});
-		} else{
-			cb(false);
-		}
-	});*/	
+	  });	
 }
 
 var isUsernameTaken = function(data, cb){
@@ -102,35 +86,21 @@ var isUsernameTaken = function(data, cb){
 			db.close();
 		  });
 	  });
-
-	/*db.account.find({username:data.username}, function(err, res){
-		if(res[0]){
-			cb(true);
-		}else{
-			cb(false);
-		}
-	});*/
 }
 
 var addUser = function(data, cb){
 	bcrypt.hash(data.password, 10).then(hash=>{
 		MongoClient.connect(url, function(err, db) {
 			if (err) throw err;
-			var dbo = db.db("mydb");
-			//var myobj = {username:data.username, hash:hash};
+			var dbo = db.db("ZenIdle");
 			dbo.collection("account").insertOne({username:data.username, hash:hash}, function(err, res) {
-			  if (err) {cb(err)}else{cb(res)};
-			 
+			  if (err) throw err;
+				cb(true);
 			  db.close();
 			});
 			
 		  });
-	});
-	/*bcrypt.hash(data.password, 10).then(hash=>{
-		db.account.insert({username:data.username, hash:hash}, function(err){
-			cb(true);
-		});
-	});*/	
+	});	
 }
 
 //socket io
@@ -160,20 +130,17 @@ io.sockets.on('connection', function(socket){
 				socket.emit('nameTaken');
 			}else{
 				addUser(data, function(res){
-					socket.emit('debug', {result:res});
-					/*if(res){
+					if(res){
 						socket.emit('signupResponse', {success:true});
 					}else{
 						socket.emit('signupResponse', {success:false});
-					}*/
+					}
 				});	
 			}	
 		});
 	});
 
 	
-	
-//	serverMsg("A new player joined the game: "+socket.id);
 	
 	socket.on('chatMsg', function(data){
 		for(var i in socket_list){
