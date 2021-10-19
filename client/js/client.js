@@ -80,6 +80,8 @@ let chatDiv = $('#chatDiv');
 let chatTextDiv = $('#chatTextDiv');
 let chatinput = $('#chatinput');
 
+chatDiv.resizable();
+
 openchat.on('click', function(){
 	chatDiv.toggle();
 	chatinput.focus();
