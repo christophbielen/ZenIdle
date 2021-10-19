@@ -37,14 +37,15 @@ socket.on('loginResponse', function(data){
 		passworda.val("");
 		loadingScreen.css({"display": "none"});
 	}else{
+		loadingScreen.css({"display": "none"});
 		alert("Username or password is not correct. Try again.");
 	}
 });
 
 signupbutton.on('click', function(){
 	if(passwordsignup.val() == passwordbsignup.val()){
+		loadingScreen.css({"display": "grid"});
 		socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
-
 	}else{
 		alert("Passwords don't match.");
 	}
@@ -53,8 +54,8 @@ signupbutton.on('click', function(){
 passwordbsignup.keypress(function(event) {
 	if (event.keyCode == 13) {
 		if(passwordsignup.val() == passwordbsignup.val()){
+			loadingScreen.css({"display": "grid"});
 			socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
-
 		}else{
 			alert("Passwords don't match.");
 		}
@@ -65,10 +66,12 @@ socket.on('signupResponse', function(data){
 	if(data.success){
 		usernamesignup.val("");
 		passwordsignup.val("");
+		loadingScreen.css({"display": "none"});
 		alert("Sign up was successful. You can login now.");
 	}else {
 		usernamesignup.val("");
 		passwordsignup.val("");
+		loadingScreen.css({"display": "none"});
 		alert("Sign up did not succeed. Try again.");
 	}
 });
