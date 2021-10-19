@@ -15,17 +15,17 @@ let passwordsignup = $('#passwordsignup');
 let passwordbsignup = $('#passwordbsignup');
 let signupbutton = $('#signupbutton');
 
+let loadingScreen = $('#loadingScreen');
+
 loginbutton.on('click', function(){
+	loadingScreen.css({"display": "grid"});
 	socket.emit('login', {username:usernamea.val(), password:passworda.val()});
-	usernamea.val("");
-	passworda.val("");
 });
 
 passworda.keypress(function(event) {
 	if (event.keyCode == 13) {
+		loadingScreen.css({"display": "grid"});
 		socket.emit('login', {username:usernamea.val(), password:passworda.val()});
-		usernamea.val("");
-		passworda.val("");
 	}
 });
 
@@ -33,6 +33,9 @@ socket.on('loginResponse', function(data){
 	if (data.success){
 		loginScreen.hide();
 		openchat.show();
+		usernamea.val("");
+		passworda.val("");
+		loadingScreen.css({"display": "none"});
 	}else{
 		alert("Username or password is not correct. Try again.");
 	}
@@ -41,8 +44,7 @@ socket.on('loginResponse', function(data){
 signupbutton.on('click', function(){
 	if(passwordsignup.val() == passwordbsignup.val()){
 		socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
-		usernamesignup.val("");
-		passwordsignup.val("");
+
 	}else{
 		alert("Passwords don't match.");
 	}
@@ -52,8 +54,7 @@ passwordbsignup.keypress(function(event) {
 	if (event.keyCode == 13) {
 		if(passwordsignup.val() == passwordbsignup.val()){
 			socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
-			usernamesignup.val("");
-			passwordsignup.val("");
+
 		}else{
 			alert("Passwords don't match.");
 		}
@@ -62,8 +63,12 @@ passwordbsignup.keypress(function(event) {
 
 socket.on('signupResponse', function(data){
 	if(data.success){
+		usernamesignup.val("");
+		passwordsignup.val("");
 		alert("Sign up was successful. You can login now.");
 	}else {
+		usernamesignup.val("");
+		passwordsignup.val("");
 		alert("Sign up did not succeed. Try again.");
 	}
 });
