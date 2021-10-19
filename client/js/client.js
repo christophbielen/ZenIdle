@@ -19,13 +19,13 @@ let loadingScreen = $('#loadingScreen');
 let loadingText = $('#loadingText');
 
 loginbutton.on('click', function(){
-	setloadingScreen("Logging in ...");
+	setLoadingScreen("Logging in ...");
 	socket.emit('login', {username:usernamea.val(), password:passworda.val()});
 });
 
 passworda.keypress(function(event) {
 	if (event.keyCode == 13) {
-		setloadingScreen("Logging in ...");
+		setLoadingScreen("Logging in ...");
 		socket.emit('login', {username:usernamea.val(), password:passworda.val()});
 	}
 });
@@ -45,7 +45,7 @@ socket.on('loginResponse', function(data){
 
 signupbutton.on('click', function(){
 	if(passwordsignup.val() == passwordbsignup.val()){
-		setloadingScreen("Signing up ...");
+		setLoadingScreen("Signing up ...");
 		socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
 	}else{
 		alert("Passwords don't match.");
@@ -55,7 +55,7 @@ signupbutton.on('click', function(){
 passwordbsignup.keypress(function(event) {
 	if (event.keyCode == 13) {
 		if(passwordsignup.val() == passwordbsignup.val()){
-			setloadingScreen("Signing up ...");
+			setLoadingScreen("Signing up ...");
 			socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
 		}else{
 			alert("Passwords don't match.");
