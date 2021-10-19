@@ -44,32 +44,36 @@ socket.on('loginResponse', function(data){
 });
 
 signupbutton.on('click', function(){
-	if(passwordsignup.val() == passwordbsignup.val()){
+	if((passwordsignup.val()!="")&&(passwordsignup.val() == passwordbsignup.val())){
 		setLoadingScreen("Signing up ...");
 		socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
 	}else{
-		alert("Passwords don't match.");
+		alert("Passwords don't match or are empty.");
 	}
 });
 
 passwordbsignup.keypress(function(event) {
 	if (event.keyCode == 13) {
-		if(passwordsignup.val() == passwordbsignup.val()){
+		if((passwordsignup.val()!="")&&(passwordsignup.val() == passwordbsignup.val())){
 			setLoadingScreen("Signing up ...");
 			socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
 		}else{
-			alert("Passwords don't match.");
+			alert("Passwords don't match or are empty.");
 		}
 	}
 });
 
 socket.on('signupResponse', function(data){
 	if(data.success){
+		usernamea.val("");
+		passworda.val("");
 		usernamesignup.val("");
 		passwordsignup.val("");
 		loadingScreen.css({"display": "none"});
 		alert("Sign up was successful. You can login now.");
 	}else {
+		usernamea.val("");
+		passworda.val("");
 		usernamesignup.val("");
 		passwordsignup.val("");
 		loadingScreen.css({"display": "none"});
