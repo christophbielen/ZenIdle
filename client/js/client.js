@@ -16,15 +16,16 @@ let passwordbsignup = $('#passwordbsignup');
 let signupbutton = $('#signupbutton');
 
 let loadingScreen = $('#loadingScreen');
+let loadingText = $('#loadingText');
 
 loginbutton.on('click', function(){
-	loadingScreen.css({"display": "grid"});
+	setloadingScreen("Logging in ...");
 	socket.emit('login', {username:usernamea.val(), password:passworda.val()});
 });
 
 passworda.keypress(function(event) {
 	if (event.keyCode == 13) {
-		loadingScreen.css({"display": "grid"});
+		setloadingScreen("Logging in ...");
 		socket.emit('login', {username:usernamea.val(), password:passworda.val()});
 	}
 });
@@ -44,7 +45,7 @@ socket.on('loginResponse', function(data){
 
 signupbutton.on('click', function(){
 	if(passwordsignup.val() == passwordbsignup.val()){
-		loadingScreen.css({"display": "grid"});
+		setloadingScreen("Signing up ...");
 		socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
 	}else{
 		alert("Passwords don't match.");
@@ -54,7 +55,7 @@ signupbutton.on('click', function(){
 passwordbsignup.keypress(function(event) {
 	if (event.keyCode == 13) {
 		if(passwordsignup.val() == passwordbsignup.val()){
-			loadingScreen.css({"display": "grid"});
+			setloadingScreen("Signing up ...");
 			socket.emit('signup', {username:usernamesignup.val(), password:passwordsignup.val()});
 		}else{
 			alert("Passwords don't match.");
@@ -79,6 +80,12 @@ socket.on('signupResponse', function(data){
 socket.on('nameTaken', function(data){
 		alert("This name is already taken. Try again with another name.");
 });
+
+function setLoadingScreen(text){
+	loadingText.text(text);
+	loadingScreen.css({"display": "grid"});
+}
+
 
 ////////////////////////
 //   Chat functions   //
@@ -114,6 +121,7 @@ socket.on('serverMsg', function(data){
 	chatTextDiv.append("<div><span style='color:green;'>"+data.msg+"</span></div>");
 	setTimeout(function(){ chatTextDiv.scrollTop(chatTextDiv[0].scrollHeight); }, 100);
 });
+
 
 ///////////// DEBUG //////////
 socket.on('debug', function(data){
