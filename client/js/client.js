@@ -38,8 +38,13 @@ socket.on('loginResponse', function(data){
 		passworda.val("");
 		loadingScreen.css({"display": "none"});
 	}else{
-		loadingScreen.css({"display": "none"});
-		alert("Username or password is not correct. Try again.");
+		if(!data.loggedin){
+			loadingScreen.css({"display": "none"});
+			alert("Username or password is not correct. Try again.");
+		} else{
+			loadingScreen.css({"display": "none"});
+			alert("You are already logged in.");
+		}
 	}
 });
 

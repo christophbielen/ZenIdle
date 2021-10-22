@@ -112,16 +112,22 @@ io.sockets.on('connection', function(socket){
 	
 	//login and signup
 	socket.on('login', function(data){
-		isValidPassword(data, function(res){
-			if(res){
-				socket.name = data.username;
-				Player.onconnect(socket);
-				socket.emit('loginResponse', {success:true});
-			}else {
-				socket.emit('loginResponse', {success:false});
-			}
+		let playerArray = Object.values(player_list);
+		let onlineArray = playerArray.find(x => x.name == data.username);
+		if(!onlineArray){
+			isValidPassword(data, function(res){
+				if(res){
+					socket.name = data.username;
+					Player.onconnect(socket);
+					socket.emit('loginResponse', {success:true, loggedin:false});
+				}else {
+					socket.emit('loginResponse', {success:false, loggedin:false});
+				}
 
-		});
+			});
+		}else {
+			socket.emit('loginResponse', {success:false, loggedin:true});
+		}
 	});
 
 	socket.on('signup', function(data){

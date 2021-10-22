@@ -30,6 +30,7 @@ body {
 	z-index:110;
 	background-color: #bbddff;
 	text-align:center;
+
 }
 
 #loginScreen .title{
@@ -43,6 +44,9 @@ body {
 	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
 	margin: 25px auto;
 }
+
+
+
 .login h1, .signup h1 {
 	text-align: center;
 	color: #5b6574;
