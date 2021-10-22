@@ -149,8 +149,16 @@ io.sockets.on('connection', function(socket){
 	
 	
 	socket.on('chatMsg', function(data){
-		for(var i in socket_list){
-			socket_list[i].emit('addToChat', {user:socket.name, msg: data.chatMsg});
+		if(data.chatMsg.includes("***adminwarning***:")){
+			let str = data.chatMsg.replace("***adminwarning***:","");
+			for(var i in socket_list){
+				socket_list[i].emit('warning', {user:socket.name, msg: str});
+
+			}
+		}else{
+			for(var i in socket_list){
+				socket_list[i].emit('addToChat', {user:socket.name, msg: data.chatMsg});
+			}
 		}
 	});
 	

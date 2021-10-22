@@ -91,10 +91,17 @@ socket.on('nameTaken', function(data){
 		loadingScreen.css({"display": "none"});
 });
 
+socket.on('disconnect', function(){
+	loginScreen.show();
+	alert('The server is down. Maybe for an update. Try again later.');
+});
+
 function setLoadingScreen(text){
 	loadingText.text(text);
 	loadingScreen.css({"display": "grid"});
 }
+
+
 
 
 ////////////////////////
@@ -116,6 +123,12 @@ openchat.on('click', function(){
 socket.on('addToChat', function(data){
 	chatTextDiv.append("<div><span class='chatname'>"+data.user+": </span><span class='chattext'>"+data.msg+"</span></div>");
 	setTimeout(function(){ chatTextDiv.scrollTop(chatTextDiv[0].scrollHeight); }, 100);
+});
+
+socket.on('warning', function(data){
+	chatTextDiv.append("<div><span class='chatname'>"+data.user+": </span><span class='chattext'>"+data.msg+"</span></div>");
+	setTimeout(function(){ chatTextDiv.scrollTop(chatTextDiv[0].scrollHeight); }, 100);
+	alert(data.msg);
 });
 
 chatinput.keypress(function(event) {

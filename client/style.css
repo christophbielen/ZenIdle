@@ -22,7 +22,7 @@ body {
 /* Login Screen */
 
 #loginScreen {
-	position:aboslute;
+	position:absolute;
 	top:0;
 	left:0;
 	width:100%;
