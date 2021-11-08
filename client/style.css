@@ -19,6 +19,129 @@ body {
 	margin:0;
 }
 
+/* Gamewrapper */
+#gamewrapper {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:1;
+	display:grid;
+	grid-template-columns: 3fr 4fr 3fr;
+	grid-template-rows: 1.5rem 1fr;
+}
+
+		/* Header */
+		#header{
+			grid-column-start: 1;
+			grid-column-end: 4;
+			grid-row-start: 1;
+			grid-row-end: 2;
+			font-size:0.85rem;
+			padding-left:0.5rem;
+			padding-top:0.2rem;
+			color:rgb(50, 50, 105);
+		}
+
+		/* Main progressbar section */
+		#mainProgressbarSection{
+			position:relative;
+			margin-top:1em;
+			width:100%;
+			height:auto;
+			text-align:center;
+			grid-column-start: 2;
+  			grid-column-end: 3;
+  			grid-row-start: 2;
+  			grid-row-end: 3;
+			border-left: 1px solid #ffffff;
+			border-right: 1px solid #ffffff;
+		}
+		
+			/* Capacity text */
+			#enlightmentCapacityDiv{
+				font-size:1.2em;
+				height:2em;
+				font-weight:bold;
+				color:#ffffff;
+				text-shadow: 1px 1px 3px #7799bb;
+				margin-bottom:0.3em;
+				opacity:0.0;
+				
+			}
+
+			#mainProgressbarDiv{
+				width:100%;
+				text-align:center;
+				display:grid;
+				justify-items:center;
+			}
+			
+			/* progressbar */
+			#mainProgressbarOutside{
+				position:relative;
+				width:90%;
+				height:2rem;
+				border:2px solid white;
+				border-radius:0.5em;
+				box-sizing: content-box;
+
+			}
+
+			#mainProgressbarInside {
+				position:absolute;
+				left:0;
+				top:0;
+				width:20%;
+				height:1.99rem;
+				background:#ffffff;
+				box-shadow:0px 0px 20px #ffffff;
+			}
+			
+			#enlightmentTextDiv{
+				position:absolute;
+				left:0;
+				top:0;
+				width:100%;
+				height:100%;
+				text-align: center;
+				font-size:1.5em;
+				font-weight:bold;
+				color:#7799bb;
+			}
+			
+			/* per second text */
+			#perSecondDiv{
+				font-size:1.3em;
+				font-weight:bold;
+				color:#ffffff;
+				text-shadow: 1px 1px 3px #7799bb;
+				margin-top:0.3em;
+				opacity:0.0;
+			}
+			
+			/* Use understanding button */
+			#useUnderstandingButton{
+				float:right;
+				padding:0.5em;
+				font-weight:bold;
+				border: none;
+				color: white;
+				border-radius: 6px;
+				-webkit-transition-duration: 0.4s; /* Safari */
+				transition-duration: 0.4s;
+				opacity:0.0;
+				cursor:pointer;
+			}
+			
+			#useUnderstandingButton:focus {outline:0;}
+	
+			#clearFloat{
+				clear:both;
+			}
+
+		
 /* Login Screen */
 
 #loginScreen {
@@ -199,4 +322,21 @@ body {
 	color:#ffffff !important;
 	font-size:2rem;
 	font-weight:bold;
+}
+
+
+/* update */
+
+#updatecounter {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:2rem;
+	font-size:1rem;
+	font-weight:bold;
+	color:#ffffff;
+	background-color:rgba(0,0,0,0.3);
+	text-align:center;
+	display:none;
 }

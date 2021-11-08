@@ -26,6 +26,10 @@ serv.listen(port);
 var socket_list = {};
 var player_list = {};
 
+var serverUpdate = false;
+var serverUpdateCount = 0;
+var updateCountInterval = 0;
+
 var Player = function(socket){
 	var self = {
 		id:socket.id,
@@ -103,6 +107,7 @@ var addUser = function(data, cb){
 	});	
 }
 
+
 //socket io
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
@@ -120,6 +125,9 @@ io.sockets.on('connection', function(socket){
 					socket.name = data.username;
 					Player.onconnect(socket);
 					socket.emit('loginResponse', {success:true, loggedin:false});
+					if(serverUpdate){
+						socket_list[i].emit('update', {msg: serverUpdateCount});
+					}
 				}else {
 					socket.emit('loginResponse', {success:false, loggedin:false});
 				}
@@ -153,7 +161,14 @@ io.sockets.on('connection', function(socket){
 			let str = data.chatMsg.replace("***adminwarning***:","");
 			for(var i in socket_list){
 				socket_list[i].emit('warning', {user:socket.name, msg: str});
-
+			}
+		}else if(data.chatMsg.includes("***serverupdate***:")){
+			let str = data.chatMsg.replace("***serverupdate***:","");
+			serverUpdateCount = parseInt(str);
+			updateCountInterval = setInterval(startUpdateCount,1000);
+			serverUpdate = true;
+			for(var i in socket_list){
+				socket_list[i].emit('update', {msg: parseInt(str)});
 			}
 		}else{
 			for(var i in socket_list){
@@ -172,5 +187,16 @@ io.sockets.on('connection', function(socket){
 function serverMsg(data){
 	for(var i in socket_list){
 		socket_list[i].emit('serverMsg', {msg:data});
+	}
+}
+
+function startUpdateCount(){
+	if(serverUpdateCount>0){
+		serverUpdateCount=serverUpdateCount-1;
+	}else {
+		clearInterval(updateCountInterval);
+		for(var i in socket_list){
+			socket_list[i].emit('stopUpdateCount');
+		}
 	}
 }

@@ -111,6 +111,10 @@ function setLoadingScreen(text){
 let chatDiv = $('#chatDiv');
 let chatTextDiv = $('#chatTextDiv');
 let chatinput = $('#chatinput');
+let updatecounter = $('#updatecounter');
+let updatecountertext = $('#updatecountertext');
+let updateTime = 0;
+let updateTimeInterval = 0;
 
 chatDiv.resizable();
 
@@ -131,6 +135,12 @@ socket.on('warning', function(data){
 	alert(data.msg);
 });
 
+socket.on('update', function(data){
+	updateTime = data.msg;
+	updatecounter.show();
+	updateTimeInterval = setInterval(startUpdateCounter,1000);
+});
+
 chatinput.keypress(function(event) {
 	if (event.keyCode == 13) {
 		let chatText = chatinput.val();
@@ -144,6 +154,19 @@ socket.on('serverMsg', function(data){
 	chatTextDiv.append("<div><span style='color:green;'>"+data.msg+"</span></div>");
 	setTimeout(function(){ chatTextDiv.scrollTop(chatTextDiv[0].scrollHeight); }, 100);
 });
+
+function startUpdateCounter(){
+	if(updateTime>0){
+		updateTime = updateTime-1;
+		var minutes = Math.floor(updateTime/60);
+		var seconds = updateTime%60;
+		updatecountertext.text(minutes+":"+seconds);
+	}else {
+		clearInterval(updateTimeInterval);
+		updatecounter.hide();
+		alert("server is updating. Reload page before you login after the update.");
+	}
+}
 
 
 ///////////// DEBUG //////////

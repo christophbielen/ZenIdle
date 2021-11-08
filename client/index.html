@@ -19,9 +19,30 @@
 	</head>
 	
 	<body id="body">
+		<div id="gamewrapper">
+			<!-- Headersection-->
+			<div id="header">
+				ZenCremental multiplayer - v. 0.0 - &copy; Christoph Bielen
+			</div>
 
-
-
+			<!-- progresbar section -->
+			<div id="mainProgressbarSection">
+				<div id="enlightmentCapacityDiv">Max cap: <span id="enlightmentMaxCapText">0</span></div>
+				<div id="mainProgressbarDiv">
+					<div id="mainProgressbarOutside">
+						<div id="mainProgressbarInside">
+							
+						</div>
+						<div id="enlightmentTextDiv">
+							<span id="enlightmentText">0</span>
+						</div>
+					</div>
+				</div>
+				<div id="perSecondDiv"><span id="perSecondText">0</span> per second</div>
+				<div id="useUnderstandingButton" class="activeButton">Use understanding</div>
+				<div id="clearFloat">&nbsp;</div>
+			</div>	
+		</div>
 
 		<div id="chatDiv">
 			<div id="chatTextDiv">
@@ -32,7 +53,7 @@
 
 
 		<div id="loginScreen">
-			<h1 class="title">ZenIdle</h1>
+			<h1 class="title">ZenCremental</h1>
 		
 				<div class="login">
 					<h1>Login</h1>
@@ -75,6 +96,10 @@
 			<div id="loadingImage">
 				<img src="/client/img/loading.gif" /><br/><span id="loadingText">Loading...</span>
 			</div>
+		</div>
+
+		<div id="updatecounter">
+			The server will update in: <span id="updatecountertext">30:00</span>
 		</div>
 
 		<script src="https://cdn.socket.io/4.2.0/socket.io.min.js"></script>
