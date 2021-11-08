@@ -17,6 +17,7 @@ html {
 body {
 	background-color:#bbddff;
 	margin:0;
+	overflow: hidden;
 }
 
 /* Gamewrapper */
