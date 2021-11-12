@@ -157,6 +157,7 @@ io.sockets.on('connection', function(socket){
 	
 	
 	socket.on('chatMsg', function(data){
+		data.chatMsg = data.chatMsg.replace( /(<([^>]+)>)/ig, '');
 		if(data.chatMsg.includes("***adminwarning***:")){
 			let str = data.chatMsg.replace("***adminwarning***:","");
 			for(var i in socket_list){
